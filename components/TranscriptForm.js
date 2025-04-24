@@ -1,7 +1,7 @@
+
 export default function TranscriptForm({ url, setUrl, lang, setLang, handleSubmit, loading }) {
   return (
     <>
-      {/* 🌐 Language Flags */}
       <div style={{ margin: '1rem 0', display: 'flex', gap: '1rem' }}>
         <button
           onClick={() => setLang('en')}
