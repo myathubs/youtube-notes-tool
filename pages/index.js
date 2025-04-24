@@ -1,10 +1,12 @@
-
 import { useState } from 'react';
+import TranscriptForm from '../components/TranscriptForm';
+import OutputBox from '../components/OutputBox';
 
 export default function Home() {
   const [url, setUrl] = useState('');
   const [summary, setSummary] = useState('');
   const [loading, setLoading] = useState(false);
+  const [lang, setLang] = useState('en');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -12,29 +14,25 @@ export default function Home() {
     const res = await fetch('/api/summarize', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ url }),
+      body: JSON.stringify({ url, lang }),
     });
     const data = await res.json();
-    setSummary(data.summary);
+    setSummary(data.summary || 'No summary returned.');
     setLoading(false);
   };
 
   return (
     <div style={{ backgroundColor: '#111', color: '#fff', minHeight: '100vh', padding: '2rem' }}>
       <h1>YouTube to Blog Note Generator</h1>
-      <form onSubmit={handleSubmit} style={{ marginTop: '1rem' }}>
-        <input
-          type="text"
-          value={url}
-          onChange={(e) => setUrl(e.target.value)}
-          placeholder="Enter YouTube video URL"
-          style={{ padding: '0.5rem', width: '80%' }}
-        />
-        <button type="submit" style={{ padding: '0.5rem 1rem', marginLeft: '1rem' }}>Summarize</button>
-      </form>
-      <div style={{ marginTop: '2rem', whiteSpace: 'pre-wrap' }}>
-        {loading ? 'Loading summary...' : summary}
-      </div>
+      <TranscriptForm
+        url={url}
+        setUrl={setUrl}
+        lang={lang}
+        setLang={setLang}
+        handleSubmit={handleSubmit}
+        loading={loading}
+      />
+      <OutputBox summary={summary} loading={loading} />
     </div>
   );
 }

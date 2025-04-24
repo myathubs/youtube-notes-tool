@@ -1,5 +1,40 @@
-
+/* Global Styles - Dark Theme */
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #111;
+  color: #fff;
+}
+
+input, button {
+  font-family: inherit;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  outline: none;
+}
+
+input {
+  background-color: #222;
+  color: #fff;
+  padding: 0.5rem;
+  border: 1px solid #333;
+}
+
+button {
+  background-color: #333;
+  color: #fff;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: #444;
+}
+
+h1 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
 }
